@@ -51,6 +51,14 @@ module.exports = function (grunt) {
         },
         src: ['test/fixtures/file.png', 'test/fixtures/another.png'],
         dest: 'test/tmp'
+      },
+      withBaseUrl: {
+        options: {
+          baseUrl: 'cdn.com'
+        },
+        src: ['test/fixtures/file.png', 'test/fixtures/another.png'],
+        dest: 'test/tmp'
+
       }
     },
     simplemocha: {
@@ -81,7 +89,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('checkSummary', 'Check that summary attribute is correctly created', function () {
     var src = path.normalize('test/fixtures/file.png');
-    var expected = path.normalize('test/tmp/file.a0539763.png');
+    var expected = path.normalize('cdn.com/test/tmp/file.a0539763.png');
     assert.equal(grunt.filerev.summary[src], expected);
   });
 };
