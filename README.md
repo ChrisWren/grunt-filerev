@@ -73,6 +73,13 @@ filerev: {
   }
 }
 ```
+
+#### options.baseUrl
+
+Type: `String`  
+
+The optional base url to add when using a CDN to deliver revisioned assets.
+
 #### Summary
 
 The task keeps track of all files created and its sources in a summary that is
