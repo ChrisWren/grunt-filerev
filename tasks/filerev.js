@@ -17,7 +17,7 @@ module.exports = function (grunt) {
 
     eachAsync(this.files, function (el, i, next) {
       var move = true;
-      
+
       // If dest is furnished it should indicate a directory
       if (el.dest) {
         // When globbing is used, el.dest contains basename, we remove it
@@ -45,6 +45,7 @@ module.exports = function (grunt) {
         var ext = path.extname(file);
         var newName = [path.basename(file, ext), suffix, ext.slice(1)].join('.');
         var resultPath;
+        var computedPath;
 
         if (move) {
           dirname = path.dirname(file);
@@ -56,7 +57,14 @@ module.exports = function (grunt) {
           grunt.file.copy(file, resultPath);
         }
 
-        filerev.summary[path.normalize(file)] = path.join(dirname, newName);
+
+        if (options.baseUrl) {
+          computedPath = options.baseUrl;
+        } else {
+          computedPath = '';
+        }
+
+        filerev.summary[path.normalize(file)] = path.join(computedPath, dirname, newName);
         grunt.log.writeln(chalk.green('✔ ') + file + chalk.gray(' changed to ') + newName);
       });
       next();
